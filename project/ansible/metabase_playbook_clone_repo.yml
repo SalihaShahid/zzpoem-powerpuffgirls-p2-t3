@@ -1,0 +1,22 @@
+-name: Download metabase from soouce code
+-hosts: all
+  tasks:
+    -name: clone metabase repository
+    git:
+      -repo: https://github.com/metabase/metabase.git
+      dest: ~/Documents/DEVOPS/p2_t3
+    become: yes
+
+    -name: Change directory to metabse
+    shell: cd ~/Documents/DEVOPS/p2_t3/metabase
+    chdir: ~/Documents/DEVOPS/p2_t3/metabase
+    become: yes
+
+
+    -name: start backend server
+    shell: clojure -M:run
+    become: yes
+
+    -name: build front-end
+    shell: yarn build-hot
+    become: yes

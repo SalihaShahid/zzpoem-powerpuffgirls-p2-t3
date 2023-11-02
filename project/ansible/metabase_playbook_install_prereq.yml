@@ -1,0 +1,29 @@
+---
+-name: Download metabase from soouce code
+-hosts: all
+  tasks:
+    -name: install jdk
+    apt:
+      name: openjdk-11-jdk
+      state: present
+    become: yes
+
+
+    -name: install node.js
+    apt:
+      name: nodejs
+      state: present
+    become: yes
+
+    -name: install yarn globally
+    npm:
+      name: yarn
+      global: yes
+      state: present
+    become: yes
+
+
+    
+
+   
+      
