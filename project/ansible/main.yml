@@ -1,3 +1,4 @@
 ---
 - import_playbook: metabase_playbook_install_prereq.yml
 - import_playbook: metabase_playbook_clone_repo.yml
+- import_playbook: vuestorefront_playbook.yml

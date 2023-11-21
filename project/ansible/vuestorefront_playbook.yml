@@ -1,0 +1,39 @@
+---
+- name: Vue Storefront Installation Playbook
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Check Node Version
+      command: node -v
+
+    - name: Generate a New Project
+      command: npx @vue-storefront/cli generate store
+      args:
+        creates: "rija/package.json"  # Skips if the directory exists
+
+    - name: Change Directory and Install Dependencies
+      command: yarn
+      args:
+        chdir: "rija"
+      register: yarn_install
+
+    - name: Configure the Project
+      debug:
+        msg: "Configure the project according to the selected e-commerce integration's documentation."
+
+    - name: Start the Project in Development Mode
+      command: yarn dev
+      args:
+        chdir: "rija"
+      async: 0
+      poll: 0
+      ignore_errors: yes
+
+    - name: Recommended Tools Setup
+      debug:
+        msg: "Install Vue.js Devtools in your browser for better component inspection. Install Vetur extension in VS Code for Vue.js development."
+
+    - name: Next Steps
+      debug:
+        msg: "Explore the Project structure and navigate through the files. Refer to the platform-specific documentation on the Integrations page."
